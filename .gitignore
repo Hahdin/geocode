@@ -89,5 +89,4 @@ typings/
 
 # mine
 *.txt
-*.tar.gz
 envs.json
