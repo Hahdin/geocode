@@ -1,6 +1,5 @@
 import test from 'ava';
 import {
-    extractFiledata, 
     extractAddresses, 
     formatAll,
     makeDataAvailable,
@@ -34,7 +33,7 @@ test('extract address', async function (t) {
 });
 
 /**
- * Test to make sure out formatting works
+ * Test to make sure our formatting works
  * 
  * Should trim values and replace internal ws w/ '+'
  */
