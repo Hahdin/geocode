@@ -17,8 +17,8 @@ test('make data available', async function (t){
     const value = await makeDataAvailable(src);
     console.log(value)
     t.true(value);
-
 })
+
 /**
  * Test to confirm extracting address from the API
  * using a test file (portion of addresses.txt). The
