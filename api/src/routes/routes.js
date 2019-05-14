@@ -1,5 +1,4 @@
 'use strict'
-//const {getSurveys, getWellInformation} = require('./surveys')
 const {getAddresses} = require('./geocode')
 const express = require('express')
 const router = express.Router()

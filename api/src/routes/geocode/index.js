@@ -1,3 +1,4 @@
+'use strict'
 const fs = require('fs');
 const path = require('path')
 const targz = require('targz');
@@ -38,7 +39,8 @@ const getAddresses = () => async (req, res) => {
    {//negative numbers not allowed
       query.limit = '10';
    }
-   if (!query.offset) {
+   if (!query.offset) 
+   {
       query = {
          ...query,
          offset: '0'
@@ -80,7 +82,7 @@ const getAddresses = () => async (req, res) => {
 
       let data = await extractAddresses(query, DATA_SRC);
       data = data.filter(item => item);//remove nulls
-      if (query.format && query.format === 'geoJSON')
+      if (query.format && 'geoJSON' === query.format )
       {
          data = getGeoJSON(data);
          return res.json({
@@ -114,7 +116,7 @@ const getAddresses = () => async (req, res) => {
 
 /**
  * Convert data to geoJSON format
- * @param {array} data 
+ * @param {array} data Return from API
  */
 const getGeoJSON = (data) =>{
    let geo = {
@@ -200,7 +202,7 @@ const extractFiledata = () => {
  * Extract Geocoded addresses that match the query criteria
  * 
  * @param {string} src source file path
- * @param {string} query ROOFTOP only currently allowed query param
+ * @param {string} query The passed in query 
  */
 const extractAddresses = (query, src) => {
    return new Promise((resolve, reject) => {
@@ -262,7 +264,7 @@ const extractAddresses = (query, src) => {
  * Call Google api to get Geocoded address
  * 
  * @param {string} address formatted address extracted from data
- * @param {*} query 
+ * @param {*} query The passed in query 
  */
 const fetchFromAPI = (address, query) => {
    return new Promise((resolve, reject) => {
@@ -276,7 +278,7 @@ const fetchFromAPI = (address, query) => {
                //get results, are they good?
                if (!json.results[0].partial_match &&
                   (json.results[0].geometry && json.results[0].geometry.location_type)
-                  && json.results[0].geometry.location_type === query.type) 
+                  && query.type === json.results[0].geometry.location_type ) 
                {
                   resolve({
                      address: `${json.results[0].formatted_address}`,
