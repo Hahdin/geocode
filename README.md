@@ -11,7 +11,7 @@ It takes 4 optional parameters:
 - type: only ```ROOFTOP``` allowed, this is the default.
 - offset: line number to start at. Default is ```0```.
 - size: Number of records to fetch. Default is ```10```, maximum is ```100```.
-- format: The only format recognized is ```geoJSON```.
+- format: The only alternate format recognized is ```geoJSON```.
 
 Example:
 

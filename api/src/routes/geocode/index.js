@@ -35,7 +35,7 @@ const getAddresses = () => async (req, res) => {
       query.limit = '100';
    }
    else if (parseInt(query.limit) < 0)
-   {
+   {//negative numbers not allowed
       query.limit = '10';
    }
    if (!query.offset) {
@@ -45,7 +45,7 @@ const getAddresses = () => async (req, res) => {
       };//default
    }
    else if(parseInt(query.offset) < 0)
-   {
+   {//negative numbers not allowed
       query.offset = '0';
    }
    try
@@ -117,7 +117,6 @@ const getAddresses = () => async (req, res) => {
  * @param {array} data 
  */
 const getGeoJSON = (data) =>{
-   console.log(data);
    let geo = {
       type: 'FeatureCollection',
       metadata: {
@@ -143,18 +142,6 @@ const getGeoJSON = (data) =>{
    })
    return geo;
 }
-// {
-//    "type":"Feature",
-//    "properties":
-//    {
-//       "place":"399 Embarcadero, San Francisco"
-//    },
-//    "geometry":
-//    {
-//       "type":"Point",
-//       "coordinates":[-122.402118,37.804068,0]
-//    }
-// },
 
 /**
  * Make sure the data is extracted and available
@@ -168,7 +155,7 @@ const makeDataAvailable = (src) => {
          fs.access(src,
             async (err) => {
                let ret = null;
-               if (err) //file not founf
+               if (err) //file not found
                {
                   //extract file
                   ret = await extractFiledata();
@@ -291,13 +278,11 @@ const fetchFromAPI = (address, query) => {
                   (json.results[0].geometry && json.results[0].geometry.location_type)
                   && json.results[0].geometry.location_type === query.type) 
                {
-                  //resolve(`${json.results[0].formatted_address}, lon:${json.results[0].geometry.location.lng}, lat:${json.results[0].geometry.location.lat}`);
                   resolve({
                      address: `${json.results[0].formatted_address}`,
                      lat: `${json.results[0].geometry.location.lat}`,
                      lng: `${json.results[0].geometry.location.lng}`,
                   });
-                  //`${json.results[0].formatted_address}, lon:${json.results[0].geometry.location.lng}, lat:${json.results[0].geometry.location.lat}`);
                }
                else 
                {
