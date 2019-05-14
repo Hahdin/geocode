@@ -26,7 +26,11 @@ test('make data available', async function (t){
  * Note: uses the api, API_KEY needs to be set in your envs.json
  */
 test('extract address', async function (t) {
-    const query = 'ROOFTOP';
+    const query = {
+        type:'ROOFTOP',
+        limit: '10',
+        offset: '0'
+    }
     const src = `${__dirname}\\api\\src\\routes\\geocode\\data\\extract\\test.txt`;
     const value = await extractAddresses(query, src);
 	t.true(Array.isArray(value) && value.length > 0);
