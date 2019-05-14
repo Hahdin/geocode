@@ -281,7 +281,7 @@ Expect only 100 records returned, maximum overriding the limit.
 Test 2
 http://localhost:8080/v0/geocode?offset=-5
 
-Expect negative offset to be updated with default '10'
+Expect negative offset to be updated with default '0'
 > pass
 
 Test 3
