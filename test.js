@@ -8,19 +8,19 @@ import {
 /**
  * Test to confirm data is extracted. 
  * 
- * If need be, delete the contents of the data/extract folder to reset
- * makeDataAvailable calls function extractFiledata
+ * If need be, delete the contents of the data/extract folder to reset.
+ * makeDataAvailable calls function extractFiledata if the extracted data
+ * is not present.
  */
 test('make data available', async function (t){
     const src = `${__dirname}\\api\\src\\routes\\geocode\\data\\extract\\addresses.txt`;
     const value = await makeDataAvailable(src);
-    console.log(value)
     t.true(value);
 })
 
 /**
- * Test to confirm extracting address from the API
- * using a test file (portion of addresses.txt). The
+ * Test to confirm extracting address from the API.
+ * Using a test file (portion of addresses.txt). The
  * function fetchFromAPI is called from within.
  * 
  * Note: uses the api, API_KEY needs to be set in your envs.json

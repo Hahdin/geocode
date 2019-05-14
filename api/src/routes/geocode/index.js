@@ -23,25 +23,38 @@ const getAddresses = () => async (req, res) => {
          type: 'ROOFTOP'
       };//default
    }
-   let isFile = await makeDataAvailable(DATA_SRC);
-   if (isFile !== true) {
+   try
+   {
+      let isFile = await makeDataAvailable(DATA_SRC);
+      if (isFile !== true) {
+         return res.json({
+            code: 500,
+            msg: 'failed',
+            data: {
+               msg: `cannot access address data`,
+               error: isFile,
+            }
+         })
+      }
+      let data = await extractAddresses(query.type, DATA_SRC);
+      data = data.filter(item => item);//remove nulls
       return res.json({
-         code: 500,
-         msg: 'failed',
+         code: 200,
+         msg: 'success',
+         data: data,
+         size: data.length,
+      })
+   }
+   catch(e)
+   {
+      return res.json({
+         code: 501,
+         msg: 'error',
          data: {
-            msg: `cannot access address data`,
-            error: isFile,
+            error: e,
          }
       })
    }
-   let data = await extractAddresses(query.type, DATA_SRC);
-   data = data.filter(item => item);//remove nulls
-   return res.json({
-      code: 200,
-      msg: 'success',
-      data: data,
-      size: data.length,
-   })
 }
 /**
  * Make sure the data is extracted and available

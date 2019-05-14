@@ -1,7 +1,8 @@
 'use strict'
 
 const express = require('express')
-const port = process.env.PORT || 2222
+const envs = require('../../envs')
+const port = process.env.PORT || envs.get('PORT')
 const app = express()
 const routes = require('./routes/routes')
 const cors = require('cors')
