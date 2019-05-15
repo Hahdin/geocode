@@ -248,7 +248,7 @@ npm i
 > For this app to run, you will need a valid [Google API key](https://developers.google.com/maps/documentation/geocoding/start#get-a-key), visit the link if you need to aquire one.
 
 ### envs.json
-You will need to create an ```evns.json``` file in the root directory. Enter the following information:
+You will need to create an ```envs.json``` file in the root directory. Enter the following information:
 ```json
 {
   "API_KEY": "Your_API_KEY_Here"
